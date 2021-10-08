@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   strlcpy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 22:49:43 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:49:46 by aconchit         ###   ########.fr       */
+/*   Created: 2021/10/04 20:32:16 by aconchit          #+#    #+#             */
+/*   Updated: 2021/10/08 22:24:05 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	char	*str;
-	int		index;
+	size_t	index;
 
 	index = 0;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str || !s)
-		return (NULL);
-	while (s[start + index] && index < (int)len && ft_strlen(s) > start)
+	if (size == 0)
+		return (ft_strlen(src));
+	while (src[index] != '\0' && index < size - 1)
 	{
-		str[index] = s[start + index];
+		dst[index] = src[index];
 		index++;
 	}
-	str[index] = '\0';
-	return (str);
+	dst[index] = '\0';
+	return (ft_strlen(src));
 }

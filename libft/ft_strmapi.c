@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 22:49:43 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:49:46 by aconchit         ###   ########.fr       */
+/*   Created: 2021/10/05 15:20:01 by aconchit          #+#    #+#             */
+/*   Updated: 2021/10/08 22:29:30 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*str;
 	int		index;
 
-	index = 0;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str || !s)
+	if (!s || !f)
 		return (NULL);
-	while (s[start + index] && index < (int)len && ft_strlen(s) > start)
+	index = 0;
+	str = ft_strdup(s);
+	if (!str)
+		return (0);
+	while (str[index])
 	{
-		str[index] = s[start + index];
+		str[index] = f(index, str[index]);
 		index++;
 	}
-	str[index] = '\0';
 	return (str);
 }

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   memchr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 22:49:43 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:49:46 by aconchit         ###   ########.fr       */
+/*   Created: 2021/10/04 20:56:56 by aconchit          #+#    #+#             */
+/*   Updated: 2021/10/08 22:50:21 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	char	*str;
-	int		index;
+	char	*a;
+	char	b;
 
-	index = 0;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str || !s)
-		return (NULL);
-	while (s[start + index] && index < (int)len && ft_strlen(s) > start)
-	{
-		str[index] = s[start + index];
-		index++;
-	}
-	str[index] = '\0';
-	return (str);
+	b = c;
+	a = (char *)s;
+	while (*a && *a != b && n-- > 0)
+		a++;
+	if (*a == b)
+		return (a);
+	return (0);
 }

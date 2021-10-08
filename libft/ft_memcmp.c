@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   memcmp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 22:49:43 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:49:46 by aconchit         ###   ########.fr       */
+/*   Created: 2021/10/04 20:57:00 by aconchit          #+#    #+#             */
+/*   Updated: 2021/10/08 22:23:41 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*str;
-	int		index;
+	unsigned char	*a;
+	unsigned char	*b;
+	size_t			index;
 
 	index = 0;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str || !s)
-		return (NULL);
-	while (s[start + index] && index < (int)len && ft_strlen(s) > start)
+	a = (unsigned char *)s1;
+	b = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (*a == *b && ++index < n)
 	{
-		str[index] = s[start + index];
-		index++;
+		a++;
+		b++;
 	}
-	str[index] = '\0';
-	return (str);
+	return (*a - *b);
 }

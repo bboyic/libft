@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   strnstr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 22:49:43 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:49:46 by aconchit         ###   ########.fr       */
+/*   Created: 2021/10/04 20:36:06 by aconchit          #+#    #+#             */
+/*   Updated: 2021/10/06 17:48:35 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	char	*str;
-	int		index;
+	char	*temp;
+	size_t	needle_size;
 
-	index = 0;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str || !s)
-		return (NULL);
-	while (s[start + index] && index < (int)len && ft_strlen(s) > start)
+	temp = 0;
+	needle_size = ft_strlen(needle);
+	if (!*needle)
+		return ((char *)haystack);
+	while (*haystack && len-- >= needle_size)
 	{
-		str[index] = s[start + index];
-		index++;
+		if (ft_strncmp(haystack, needle, needle_size) == 0)
+		{
+			temp = (char *)haystack;
+			return (temp);
+		}
+		haystack++;
 	}
-	str[index] = '\0';
-	return (str);
+	return (temp);
 }

@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   strncmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 22:49:43 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:49:46 by aconchit         ###   ########.fr       */
+/*   Created: 2021/10/04 20:35:49 by aconchit          #+#    #+#             */
+/*   Updated: 2021/10/08 22:51:17 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*str;
-	int		index;
-
-	index = 0;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str || !s)
-		return (NULL);
-	while (s[start + index] && index < (int)len && ft_strlen(s) > start)
+	while (*s1 && *s1 == *s2 && n - 1 > 0)
 	{
-		str[index] = s[start + index];
-		index++;
+		++s1;
+		++s2;
+		--n;
 	}
-	str[index] = '\0';
-	return (str);
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

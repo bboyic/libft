@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strrchr.c                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 20:57:37 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:51:23 by aconchit         ###   ########.fr       */
+/*   Updated: 2021/10/09 21:54:30 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ char	*ft_strrchr(const char *s, int c)
 
 	size = ft_strlen(s);
 	str = (char *)s;
-	while (size > 0 && str[size] != c)
-	{
+	while (size > 0 && str[size] != (char )c)
 		size--;
-	}
-	if (str[size] == c)
+	if (str[size] == (char )c)
 		return (&str[size]);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 15:01:55 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:52:17 by aconchit         ###   ########.fr       */
+/*   Updated: 2021/10/11 20:52:16 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_mem_itoa(int n)
 	int		size;
 
 	size = 0;
-	while ((unsigned int)n > 10)
+	while ((unsigned int)n >= 10)
 	{
 		size++;
 		n /= 10;

@@ -6,7 +6,7 @@
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:29:13 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:29:12 by aconchit         ###   ########.fr       */
+/*   Updated: 2021/10/12 14:55:57 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,25 @@ char	**ft_create_mem(const char *s, char c)
 	int		size;
 	char	**words;
 
+	if (!s)
+		return (NULL);
 	size = 0;
 	while (*s)
 	{
-		if (*s == c)
-			size++;
-		s++;
+		while (*s == c)
+			s++;
+		while (*s != c && *s)
+			s++;
+		size++;
+		if (*s)
+			s++;
 	}
-	words = (char **)malloc(sizeof(char *) * (size + 2));
+	if (*(--s) != c && size > 1)
+		size++;
+	words = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!words)
 		return (NULL);
+	words[size] = 0;
 	return (words);
 }
 
@@ -44,7 +53,6 @@ char	*ft_create_word_mem(const char *s, char c)
 	word = (char *)malloc(sizeof(char) * (size + 1));
 	if (!word)
 		return (NULL);
-	word[size] = 0;
 	return (word);
 }
 
@@ -85,13 +93,16 @@ char	**ft_split(char const *s, char c)
 	words = ft_create_mem(s, c);
 	if (!s || !words)
 		return (NULL);
+	if (!(*s))
+		words[0] = "";
 	index = 0;
 	while (*s)
 	{
 		while (*s == c)
 			s++;
-		words[index++] = ft_create_word(s, c);
-		if (!words[index - 1])
+		if (*s)
+			words[index++] = ft_create_word(s, c);
+		if (*s && !words[index - 1])
 		{
 			ft_clear(words);
 			return (NULL);
@@ -99,9 +110,6 @@ char	**ft_split(char const *s, char c)
 		while (*s && *s != c)
 			s++;
 	}
-	if (index > 1)
-		words[--index] = 0;
-	else
-		words[index] = 0;
+	words[index] = 0;
 	return (words);
 }

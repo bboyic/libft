@@ -6,7 +6,7 @@
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:08:15 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:49:15 by aconchit         ###   ########.fr       */
+/*   Updated: 2021/10/12 14:56:33 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,55 +20,70 @@ int	ft_isspace(char	c)
 	return (0);
 }
 
-int	ft_create_mem_trim(char const *s1, char const *set, int set_size)
+char	*ft_endstring(char *str, int index)
 {
-	int	index;
+	--index;
+	while (ft_isspace(str[index]) && index > 0)
+		index--;
+	str[index + 1] = '\0';
+	return (str);
+}
 
-	index = 0;
-	while (ft_isspace(*s1) && *s1)
-		s1++;
+int	ft_smallcmp(char s, const char *set)
+{
+	while (*set)
+	{
+		if (s == *set)
+			return (1);
+		set++;
+	}
+	return (0);
+}
+
+int	ft_memrtim(const char *s1, const char *set)
+{
+	size_t	size;
+
+	size = 0;
 	while (*s1)
 	{
-		if (ft_strncmp(s1, set, set_size) == 0)
-			s1 += set_size;
-		index++;
-		if (*s1)
-			s1++;
+		s1++;
+		size++;
 	}
 	s1--;
-	while (ft_isspace(*s1) && *s1 && index > 0)
+	while (ft_smallcmp(*s1, set) && size > 0)
 	{
+		size--;
 		s1--;
-		index--;
 	}
-	return (index);
+	return (size + 1);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*str;
-	int		size;
-	int		set_size;
+	char	*new_str;
 	int		index;
+	int		size;
 
+	index = 0;
 	if (!s1 || !set)
 		return (NULL);
-	index = 0;
-	set_size = ft_strlen(set);
-	while (ft_isspace(*s1) && *s1)
+	while (ft_smallcmp(*s1, set) && *s1)
 		s1++;
-	size = ft_strlen(s1) + set_size;
-	str = (char *)malloc(sizeof(char) * \
-	(ft_create_mem_trim(s1, set, set_size) + 1));
-	if (!str)
+	size = ft_memrtim(s1, set);
+	if (size == 0)
+		return (ft_strdup(s1));
+	new_str = (char *)malloc(sizeof(char) * (size));
+	if (!new_str)
 		return (NULL);
-	while (*s1)
+	while (*s1 && index < size - 1)
 	{
-		if (ft_strncmp(s1, set, set_size) == 0)
-			s1 += set_size;
-		str[index++] = *(s1++);
+		new_str[index] = *s1;
+		index++;
+		if (index >= size)
+			new_str[index - 1] = '\0';
+		s1++;
 	}
-	while (ft_isspace(str[--index]) && index > 0)
-		str[index] = '\0';
-	return (str);
+	new_str[index] = '\0';
+	return (new_str);
 }

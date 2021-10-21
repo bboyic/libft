@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlcat.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 20:09:52 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:50:55 by aconchit         ###   ########.fr       */
+/*   Updated: 2021/10/10 00:07:39 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		dst[dst_size + index] = src[index];
 		index++;
 	}
-	if (dstsize == (dst_size + index))
+	if (dstsize == (dst_size + index) && index > 0)
 		dst[dst_size + index - 1] = '\0';
 	else if (*dst)
 		dst[dst_size + index] = '\0';

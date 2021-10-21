@@ -6,16 +6,14 @@
 /*   By: aconchit <aconchit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:56:07 by aconchit          #+#    #+#             */
-/*   Updated: 2021/10/08 22:56:40 by aconchit         ###   ########.fr       */
+/*   Updated: 2021/10/09 20:15:58 by aconchit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
 
 typedef struct s_list
